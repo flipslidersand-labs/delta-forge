@@ -163,8 +163,7 @@ impl DeltaForge {
     ///
     /// Nodes in the same topological "layer" (no dependency among them) run in parallel.
     pub fn topo_recompute_parallel(&mut self) -> Result<()> {
-        let order = toposort(&self.graph, None)
-            .map_err(|_| anyhow::anyhow!("cycle detected"))?;
+        let order = toposort(&self.graph, None).map_err(|_| anyhow::anyhow!("cycle detected"))?;
 
         // Assign depth (layer) to each node: depth[n] = 1 + max(depth[dep])
         let mut depth: HashMap<NodeIndex, usize> = HashMap::new();
@@ -190,9 +189,7 @@ impl DeltaForge {
             let dirty: Vec<NodeIndex> = layer
                 .iter()
                 .copied()
-                .filter(|&idx| {
-                    self.graph[idx].dirty && self.graph[idx].kind == NodeKind::Compute
-                })
+                .filter(|&idx| self.graph[idx].dirty && self.graph[idx].kind == NodeKind::Compute)
                 .collect();
 
             if dirty.is_empty() {
@@ -277,8 +274,14 @@ mod tests {
         df.input("a");
         df.input("b");
         df.compute("sum", |deps| {
-            let a = deps[0].and_then(|v| v.downcast_ref::<i64>()).copied().unwrap_or(0);
-            let b = deps[1].and_then(|v| v.downcast_ref::<i64>()).copied().unwrap_or(0);
+            let a = deps[0]
+                .and_then(|v| v.downcast_ref::<i64>())
+                .copied()
+                .unwrap_or(0);
+            let b = deps[1]
+                .and_then(|v| v.downcast_ref::<i64>())
+                .copied()
+                .unwrap_or(0);
             Box::new(a + b)
         });
         df.add_dep("sum", "a").unwrap();
