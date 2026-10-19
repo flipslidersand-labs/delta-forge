@@ -10,9 +10,8 @@ pub(crate) fn propagate_dirty(graph: &mut Graph<Node, ()>, start: NodeIndex) {
 
     while let Some(idx) = queue.pop_front() {
         graph[idx].dirty = true;
-        let neighbors: Vec<NodeIndex> = graph
-            .neighbors_directed(idx, Direction::Outgoing)
-            .collect();
+        let neighbors: Vec<NodeIndex> =
+            graph.neighbors_directed(idx, Direction::Outgoing).collect();
         for next in neighbors {
             if !graph[next].dirty {
                 queue.push_back(next);
