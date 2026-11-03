@@ -9,6 +9,7 @@ pub enum NodeKind {
 
 /// Runtime-erased cached value for a Compute node.
 pub(crate) type BoxedValue = Box<dyn Any + Send + Sync>;
+pub(crate) type ComputeFn = Box<dyn Fn(&[Option<&BoxedValue>]) -> BoxedValue + Send + Sync>;
 
 /// Metadata and state for a single graph node.
 pub(crate) struct Node {
@@ -19,7 +20,7 @@ pub(crate) struct Node {
     /// Last computed / set value (type-erased).
     pub value: Option<BoxedValue>,
     /// Compute function for NodeKind::Compute.
-    pub compute_fn: Option<Box<dyn Fn(&[Option<&BoxedValue>]) -> BoxedValue + Send + Sync>>,
+    pub compute_fn: Option<ComputeFn>,
 }
 
 impl std::fmt::Debug for Node {
