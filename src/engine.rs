@@ -1,6 +1,5 @@
 use std::any::Any;
 use std::collections::HashMap;
-use std::sync::{Arc, Mutex};
 use std::time::Instant;
 
 use anyhow::{bail, Result};
