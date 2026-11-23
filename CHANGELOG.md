@@ -20,7 +20,6 @@ Versioning: [Semantic Versioning](https://semver.org/)
 - Continuous integration workflow (#3).
 - `.gitignore` that excludes the `target/` build directory (#9).
 - Committed `Cargo.lock` (#10).
-- `AGENTS.md` with contributor guidance for coding agents.
 
 ### Security
 
