@@ -1,5 +1,7 @@
 # delta-forge
 
+Release type: `library`
+
 Incremental computation framework for lazy evaluation and caching strategies (Rust).
 
 インクリメンタル計算フレームワーク — 遅延評価とキャッシュ戦略を中心に設計。
