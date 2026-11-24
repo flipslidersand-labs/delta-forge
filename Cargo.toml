@@ -3,6 +3,10 @@ name = "delta-forge"
 version = "0.1.0"
 edition = "2021"
 description = "Incremental computation engine — recomputes only what changed"
+license = "MIT"
+repository = "https://github.com/flipslidersand-labs/delta-forge"
+readme = "README.md"
+exclude = [".github/", "AGENTS.md", "release-please-config.json", ".release-please-manifest.json"]
 
 [lib]
 name = "delta_forge"
